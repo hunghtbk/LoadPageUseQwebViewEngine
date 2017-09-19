@@ -49,6 +49,7 @@
 ****************************************************************************/
 
 #include <QtWidgets>
+#include "ManageDataFromUrl.h"
 
 QT_BEGIN_NAMESPACE
 class QWebEngineView;
@@ -61,7 +62,8 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(const QUrl& url);
-
+signals:
+    void sendURL(QUrl url);
 protected slots:
 
     void adjustLocation();
@@ -86,4 +88,5 @@ private:
     QLineEdit *locationEdit;
     QAction *rotateAction;
     int progress;
+    ManageDataFromUrl *mngData;
 };

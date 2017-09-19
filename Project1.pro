@@ -6,9 +6,11 @@
 
 QT       += webenginewidgets
 
-HEADERS =   mainwindow.h
+HEADERS =   mainwindow.h \
+    ManageDataFromUrl.h
 SOURCES =   main.cpp \
-            mainwindow.cpp
+            mainwindow.cpp \
+    ManageDataFromUrl.cpp
 RESOURCES = jquery.qrc
 
 # install
