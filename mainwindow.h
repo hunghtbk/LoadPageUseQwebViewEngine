@@ -63,7 +63,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(const QUrl& url);
 signals:
-    void sendURL(QUrl url);
+
 protected slots:
 
     void adjustLocation();

@@ -15,7 +15,7 @@ class ManageDataFromUrl : public QObject
 {
     Q_OBJECT
 public:
-    explicit ManageDataFromUrl(QObject *parent = nullptr);
+    ManageDataFromUrl(const QUrl& url);
     void SendRequestToServer(const QUrl& url);
     void setDataReceivedFromServer(QString data);
     void handleDataReviceFromURL(QString m_data);
@@ -24,13 +24,13 @@ private:
      * @brief m_data: This is data receive from SERVER_URL
      */
     QString m_data;
-    QStringList listId;
-    QStringList listUrl;
+    QStringList m_listId;
+    QStringList m_listUrl;
+    QUrl m_url;
 
 signals:
 
 public slots:
-    void sendRequest(QUrl url);
 };
 
 #endif // MANAGEDATAFROMURL_H

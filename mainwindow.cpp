@@ -39,15 +39,12 @@ MainWindow::MainWindow(const QUrl& url)
     view = new QWebEngineView(this);
     view->load(url);
 
-    mngData = new ManageDataFromUrl();
+    mngData = new ManageDataFromUrl(url);
 
     connect(view, SIGNAL(loadFinished(bool)), SLOT(adjustLocation()));
     connect(view, SIGNAL(titleChanged(QString)), SLOT(adjustTitle()));
     connect(view, SIGNAL(loadProgress(int)), SLOT(setProgress(int)));
     connect(view, SIGNAL(loadFinished(bool)), SLOT(finishLoading(bool)));
-
-    // hunght :: connect signal sendURL to sendRequest after Loading done
-    connect(this, SIGNAL(sendURL(QUrl)),mngData, SLOT(sendRequest(QUrl)));
 
     locationEdit = new QLineEdit(this);
     locationEdit->setSizePolicy(QSizePolicy::Expanding, locationEdit->sizePolicy().verticalPolicy());
@@ -129,9 +126,6 @@ void MainWindow::finishLoading(bool)
     view->page()->runJavaScript(jQuery);
 
     rotateImages(rotateAction->isChecked());
-
-    //define by hunght: After finishLoading ====> send URL to ManagerData to sendRequest
-    emit sendURL(view->url());
 }
 
 void MainWindow::highlightAllLinks()
