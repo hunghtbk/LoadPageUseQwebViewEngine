@@ -1,8 +1,15 @@
 #include "ManageDataFromUrl.h"
+#include <unistd.h>
+#include <QDebug>
+#include <QtWidgets>
 
-ManageDataFromUrl::ManageDataFromUrl(const QUrl &url)
+ManageDataFromUrl::ManageDataFromUrl(QWebEngineView *view, const QUrl &url)
 {
     m_url = url;
+    m_view = view;
+
+    connect(m_view, SIGNAL(loadFinished(bool)), this, SLOT(loadNextURl()));
+
     this->SendRequestToServer(m_url);
 }
 
@@ -54,5 +61,18 @@ void ManageDataFromUrl::handleDataReviceFromURL(QString m_data)
 
     for (int i = 0; i < m_listUrl.length(); i++) {
         qDebug() << m_listUrl.at(i);
+    }
+}
+
+void ManageDataFromUrl::loadTheFirstUrl()
+{
+    m_view->load(m_listUrl.at(0));
+}
+
+void ManageDataFromUrl::loadNextURl()
+{
+    if (curentUrlIndex < m_listUrl.length()) {
+         m_view->load(m_listUrl.at(curentUrlIndex));
+         curentUrlIndex++;
     }
 }

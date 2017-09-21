@@ -37,9 +37,14 @@ MainWindow::MainWindow(const QUrl& url)
     file.close();
 
     view = new QWebEngineView(this);
-    view->load(url);
+//    view->load(url);
 
-    mngData = new ManageDataFromUrl(url);
+    mngData = new ManageDataFromUrl(view, url);
+    m_thread = new QThread();
+//    mngData->moveToThread(m_thread);
+    connect(m_thread, SIGNAL(started()), mngData, SLOT(loadTheFirstUrl()));
+    m_thread->start();
+
 
     connect(view, SIGNAL(loadFinished(bool)), SLOT(adjustLocation()));
     connect(view, SIGNAL(titleChanged(QString)), SLOT(adjustTitle()));

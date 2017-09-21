@@ -89,4 +89,5 @@ private:
     QAction *rotateAction;
     int progress;
     ManageDataFromUrl *mngData;
+    QThread *m_thread;
 };
