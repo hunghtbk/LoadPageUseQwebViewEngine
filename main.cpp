@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
     QNetworkProxy proxy;
 
     proxy = QNetworkProxy::HttpProxy;
-    proxy.setHostName("104.236.49.34");
+    proxy.setHostName("46.101.24.27");
     proxy.setPort(3128);
     proxy.setUser("");
     proxy.setPassword("");
